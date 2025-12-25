@@ -1,7 +1,3 @@
-/* =========================
-   DESIGN SYSTEM
-========================= */
-
 :root {
   --bg-main: #0b1020;
   --bg-card: #11162a;
@@ -18,10 +14,6 @@
   padding: 0;
 }
 
-/* =========================
-   PAGE BASE
-========================= */
-
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: radial-gradient(circle at top, #131a3a, var(--bg-main));
@@ -30,29 +22,31 @@ body {
   line-height: 1.7;
 }
 
-/* =========================
-   LAYOUT
-========================= */
-
 section {
   max-width: 1100px;
   margin: 0 auto;
   padding: 90px 28px;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
-
 .hero {
   text-align: center;
   animation: fadeInUp 1s ease forwards;
 }
 
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
 .hero h1 {
   font-size: 3.6rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
 }
 
 .hero h2 {
@@ -68,23 +62,6 @@ section {
   font-size: 1.05rem;
   color: #d1d5db;
 }
-
-/* Badge */
-
-.badge {
-  display: inline-block;
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  background: var(--accent-soft);
-  color: var(--accent);
-  margin-bottom: 28px;
-}
-
-/* =========================
-   HEADINGS
-========================= */
 
 h3 {
   font-size: 1.8rem;
@@ -102,19 +79,13 @@ h3::after {
   background: linear-gradient(90deg, var(--accent), transparent);
 }
 
-/* =========================
-   PROJECT CARD
-========================= */
-
-.project {
+.project,
+.skills {
   background: linear-gradient(180deg, #141a36, var(--bg-card));
   border-radius: 20px;
-  padding: 36px;
+  padding: 32px;
   border: 1px solid var(--border-soft);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
-  transform: translateY(20px);
-  opacity: 0;
-  animation: fadeInUp 1s ease forwards;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
 }
 
 .project h4 {
@@ -122,14 +93,9 @@ h3::after {
   margin-bottom: 10px;
 }
 
-.project p {
-  margin-top: 12px;
-  color: #d1d5db;
+.muted {
+  color: var(--text-muted);
 }
-
-/* =========================
-   TAGS
-========================= */
 
 .tags {
   display: flex;
@@ -147,35 +113,10 @@ h3::after {
   border: 1px solid rgba(124, 131, 255, 0.3);
 }
 
-/* =========================
-   SKILLS CARD
-========================= */
-
-.skills {
-  background: linear-gradient(180deg, #141a36, var(--bg-card));
-  border-radius: 18px;
-  padding: 28px;
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-  font-size: 0.95rem;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
 .contact {
   display: flex;
   gap: 28px;
 }
-
-.contact a {
-  font-weight: 600;
-}
-
-/* =========================
-   LINKS
-========================= */
 
 a {
   color: var(--accent);
@@ -198,10 +139,6 @@ a:hover::after {
   width: 100%;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -213,19 +150,13 @@ a:hover::after {
   }
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.6rem;
   }
-
   section {
     padding: 70px 22px;
   }
-
   .contact {
     flex-direction: column;
   }
