@@ -1,118 +1,232 @@
+/* =========================
+   DESIGN SYSTEM
+========================= */
+
 :root {
-  --accent: #6366f1;
-  --dark: #0f172a;
-  --muted: #475569;
-  --bg: #f8fafc;
-  --card: #ffffff;
+  --bg-main: #0b1020;
+  --bg-card: #11162a;
+  --accent: #7c83ff;
+  --accent-soft: rgba(124, 131, 255, 0.15);
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border-soft: rgba(255, 255, 255, 0.08);
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+/* =========================
+   PAGE BASE
+========================= */
 
 body {
-  margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
-  color: var(--dark);
-}
-
-section {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 80px 24px;
-}
-
-.hero {
-  text-align: center;
-  padding-top: 100px;
-}
-
-.badge {
-  display: inline-block;
-  background: rgba(99, 102, 241, 0.1);
-  color: var(--accent);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
-h1 {
-  font-size: 3rem;
-  margin: 20px 0 8px;
-}
-
-h2 {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--muted);
-  margin: 0;
-}
-
-h3 {
-  font-size: 1.6rem;
-  margin-bottom: 24px;
-}
-
-p {
+  background: radial-gradient(circle at top, #131a3a, var(--bg-main));
+  color: var(--text-main);
+  min-height: 100vh;
   line-height: 1.7;
 }
 
-.muted {
-  color: var(--muted);
+/* =========================
+   LAYOUT
+========================= */
+
+section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 90px 28px;
 }
 
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  text-align: center;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero h1 {
+  font-size: 3.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.hero h2 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+.hero p {
+  max-width: 720px;
+  margin: 28px auto 0;
+  font-size: 1.05rem;
+  color: #d1d5db;
+}
+
+/* Badge */
+
+.badge {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+h3 {
+  font-size: 1.8rem;
+  margin-bottom: 36px;
+  position: relative;
+}
+
+h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 64px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* =========================
+   PROJECT CARD
+========================= */
+
 .project {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, #141a36, var(--bg-card));
+  border-radius: 20px;
+  padding: 36px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards;
 }
 
 .project h4 {
-  margin-top: 0;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
 }
 
-a {
-  color: var(--accent);
-  text-decoration: none;
+.project p {
+  margin-top: 12px;
+  color: #d1d5db;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+/* =========================
+   TAGS
+========================= */
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 16px 0;
+  gap: 12px;
+  margin: 18px 0;
 }
 
 .tags span {
-  background: #eef2ff;
-  color: #3730a3;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid rgba(124, 131, 255, 0.3);
 }
 
+/* =========================
+   SKILLS CARD
+========================= */
+
 .skills {
-  background: var(--card);
-  border-radius: 14px;
-  padding: 24px;
-  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #141a36, var(--bg-card));
+  border-radius: 18px;
+  padding: 28px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+  font-size: 0.95rem;
 }
+
+/* =========================
+   CONTACT
+========================= */
 
 .contact {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
 
 .contact a {
   font-weight: 600;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  position: relative;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  section {
+    padding: 70px 22px;
+  }
+
+  .contact {
+    flex-direction: column;
+  }
 }
