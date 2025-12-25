@@ -1,37 +1,83 @@
+:root {
+  --accent: #6366f1;
+  --dark: #0f172a;
+  --muted: #475569;
+  --bg: #f8fafc;
+  --card: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f9fafb;
-  color: #1f2933;
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-  line-height: 1.6;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+}
+
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.hero {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 h1 {
-  font-size: 2.4rem;
-  margin-bottom: 0;
+  font-size: 3rem;
+  margin: 20px 0 8px;
 }
 
 h2 {
-  font-size: 1.3rem;
-  font-weight: normal;
-  color: #4b5563;
-  margin-top: 5px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0;
 }
 
 h3 {
-  margin-top: 40px;
-  border-bottom: 2px solid #e5e7eb;
-  padding-bottom: 6px;
+  font-size: 1.6rem;
+  margin-bottom: 24px;
 }
 
-h4 {
-  margin-top: 20px;
+p {
+  line-height: 1.7;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.project {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+.project h4 {
+  margin-top: 0;
+  font-size: 1.3rem;
 }
 
 a {
-  color: #2563eb;
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -39,26 +85,34 @@ a:hover {
   text-decoration: underline;
 }
 
-p {
-  margin-top: 10px;
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
 }
 
-.project {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  padding: 20px;
-  border-radius: 6px;
-  margin-top: 15px;
+.tags span {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .skills {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  padding: 15px;
-  border-radius: 6px;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.06);
+}
+
+.contact {
+  display: flex;
+  gap: 24px;
 }
 
 .contact a {
-  display: inline-block;
-  margin-top: 5px;
+  font-weight: 600;
 }
