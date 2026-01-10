@@ -126,11 +126,33 @@
       "children": [
         { "label": "MCA – Manipal University(Ongoing)" },
         { "label": "BSc Computer Science – MG University" },
-        { "label": "Microsoft SQL Professional Certification" },
-        { "label": "Microsoft Excel Professional Certification" },
-        { "label": "Google Project Management Professional Certification" },
-        { "label": "Google Statistics Certification" },
-        { "label": "IBM Data Engineering" }
+        {
+          "label": "Microsoft SQL Professional Certification",
+          "url": "https://coursera.org/verify/professional-cert/VK1V1BVE4G48",
+          "children": []
+        },
+        { 
+          "label": "Microsoft Excel Professional Certification",
+          "url": "https://coursera.org/share/5019e0e32771a3e1552d3010bbfa52b1",
+          "children": []
+        },
+        { 
+          "label": "Google Project Management Professional Certification",
+          "url": "https://coursera.org/share/ecd5f36152409798744f4ab378d81c3b",
+          "children": []
+        },
+        {
+          "label": "Google Statistics Certification", 
+          "url": "https://coursera.org/share/bb14ae7cc035fa7c625764bc9801e795",
+          "children": []
+        },
+        { "label": "IBM Data Engineering", 
+          "url": "https://www.coursera.org/account/accomplishments/verify/SWAVA3GDVNAC",
+          "children": []
+        },
+        { 
+          "label": "IBM Data Science Professional Certificate(Ongoing)"
+        }
       ]
     }
   ]

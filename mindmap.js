@@ -42,12 +42,22 @@ function drawNode(node, x) {
   /* Node group */
   const g = create("g", { class: "node" });
 
+  /* Open link if node has URL */
+  if (node.url) {
+    g.style.cursor = "pointer";
+    g.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.open(node.url, "_blank", "noopener");
+    });
+  }
+
   /* Rectangle */
   const rect = create("rect", {
     x, y,
     width: NODE_WIDTH,
     height: NODE_HEIGHT
   });
+
 
   /* Label */
   const text = create("text", {
@@ -64,6 +74,10 @@ function drawNode(node, x) {
 
   g.append(rect, text);
 
+  /* Tooltip (show full label on hover) */
+  const title = create("title");
+  title.textContent = node.label;
+  g.appendChild(title);
 
   /* Expand arrow */
   if (node.children) {
