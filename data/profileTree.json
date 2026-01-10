@@ -1,0 +1,23 @@
+{
+  "id": "root",
+  "label": "Nidhin S",
+  "children": [
+    {
+      "id": "skills",
+      "label": "Skills",
+      "children": [
+        { "id": "python", "label": "Python" },
+        { "id": "sql", "label": "SQL" },
+        { "id": "ml", "label": "Machine Learning" }
+      ]
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "children": [
+        { "id": "churn", "label": "Customer Churn Prediction" },
+        { "id": "clv", "label": "CLV Prediction" }
+      ]
+    }
+  ]
+}
