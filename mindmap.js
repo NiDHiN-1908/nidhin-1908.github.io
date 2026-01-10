@@ -5,47 +5,47 @@ const height = window.innerHeight;
 svg.setAttribute("width", width);
 svg.setAttribute("height", height);
 
-let treeData;
+let root;
 
 fetch("data/profileTree.json")
   .then(res => res.json())
   .then(data => {
-    treeData = addState(data);
+    root = initState(data);
     render();
   });
 
-function addState(node) {
+function initState(node) {
   node.collapsed = false;
   if (node.children) {
-    node.children.forEach(addState);
+    node.children.forEach(initState);
   }
   return node;
 }
 
 function render() {
   svg.innerHTML = "";
-  drawNode(treeData, width / 2, height / 2, 0);
+  drawNode(root, width / 2, height / 2, 0);
 }
 
-function drawNode(node, x, y, level) {
+function drawNode(node, x, y, depth) {
   const r = 22;
 
   const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
   g.setAttribute("class", "node");
 
-  const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  c.setAttribute("cx", x);
-  c.setAttribute("cy", y);
-  c.setAttribute("r", r);
+  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  circle.setAttribute("cx", x);
+  circle.setAttribute("cy", y);
+  circle.setAttribute("r", r);
 
-  const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  t.setAttribute("x", x);
-  t.setAttribute("y", y + 4);
-  t.setAttribute("text-anchor", "middle");
-  t.textContent = node.label;
+  const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  text.setAttribute("x", x);
+  text.setAttribute("y", y + 4);
+  text.setAttribute("text-anchor", "middle");
+  text.textContent = node.label;
 
-  g.appendChild(c);
-  g.appendChild(t);
+  g.appendChild(circle);
+  g.appendChild(text);
   svg.appendChild(g);
 
   g.addEventListener("click", e => {
@@ -57,12 +57,12 @@ function drawNode(node, x, y, level) {
   if (node.collapsed || !node.children) return;
 
   const step = (2 * Math.PI) / node.children.length;
-  const dist = 120 + level * 40;
+  const distance = 130 + depth * 40;
 
   node.children.forEach((child, i) => {
     const angle = i * step;
-    const cx = x + dist * Math.cos(angle);
-    const cy = y + dist * Math.sin(angle);
+    const cx = x + distance * Math.cos(angle);
+    const cy = y + distance * Math.sin(angle);
 
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
     line.setAttribute("x1", x);
@@ -72,6 +72,6 @@ function drawNode(node, x, y, level) {
     line.setAttribute("class", "link");
 
     svg.appendChild(line);
-    drawNode(child, cx, cy, level + 1);
+    drawNode(child, cx, cy, depth + 1);
   });
 }
