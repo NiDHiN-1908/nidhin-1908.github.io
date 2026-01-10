@@ -82,7 +82,7 @@
           "label": "Industrial Roles",
           "expanded": false,
           "children": [
-            { "label": "Work Permit Receiver – Petru Rabigh" },
+            { "label": "Work Permit Receiver – Petro Rabigh" },
             { "label": "Material Controller – Shell" }
           ]
         }
@@ -111,7 +111,7 @@
           ]
         },
         {
-          "label": "AI-Augmented Intelligence",
+          "label": "AI-Augmented Intelligence(Ongoing)",
           "expanded": false,
           "children": [
             { "label": "GenAI Explanation Layer" },
@@ -121,11 +121,14 @@
       ]
     },
     {
-      "label": "Education & Certs",
+      "label": "Education & Certifications",
       "expanded": false,
       "children": [
-        { "label": "MCA – Manipal University" },
+        { "label": "MCA – Manipal University(Ongoing)" },
         { "label": "BSc Computer Science – MG University" },
+        { "label": "Microsoft SQL Professional Certification" },
+        { "label": "Microsoft Excel Professional Certification" },
+        { "label": "Google Project Management Professional Certification" },
         { "label": "Google Statistics Certification" },
         { "label": "IBM Data Engineering" }
       ]
