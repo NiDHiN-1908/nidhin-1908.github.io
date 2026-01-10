@@ -3,7 +3,7 @@ const svg = document.getElementById("mindmap");
 /* ===== Layout Configuration ===== */
 const isMobile = window.innerWidth < 768;
 
-const NODE_WIDTH  = isMobile ? 220 : 260;
+const NODE_WIDTH  = isMobile ? 260 : 320;
 const NODE_HEIGHT = 40;
 const H_GAP       = isMobile ? 50  : 80;
 const V_GAP       = isMobile ? 10  : 14;
@@ -52,7 +52,7 @@ function drawNode(node, x) {
   /* Label */
   const text = create("text", {
     x: x + 12,
-    y: y + 26
+    y: y + NODE_HEIGHT / 2 + 5
   });
   text.textContent = node.label;
 
@@ -62,7 +62,7 @@ function drawNode(node, x) {
   if (node.children) {
     const arrow = create("text", {
       x: x + NODE_WIDTH - 18,
-      y: y + 26,
+      y: y + NODE_HEIGHT / 2 + 5,
       class: "arrow"
     });
     arrow.textContent = node.expanded ? "▾" : "▸";

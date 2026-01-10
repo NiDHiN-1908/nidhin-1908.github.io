@@ -43,6 +43,11 @@ html, body {
   font-weight: 500;
   pointer-events: none;
   user-select: none;
+
+  /* prevent overflow */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== Expand / Collapse Arrow ===== */
