@@ -54,9 +54,16 @@ function drawNode(node, x) {
     x: x + 12,
     y: y + NODE_HEIGHT / 2 + 5
   });
-  text.textContent = node.label;
+
+  const MAX_CHARS = isMobile ? 28 : 38;
+
+  text.textContent =
+    node.label.length > MAX_CHARS
+      ? node.label.slice(0, MAX_CHARS - 1) + "…"
+      : node.label;
 
   g.append(rect, text);
+
 
   /* Expand arrow */
   if (node.children) {
