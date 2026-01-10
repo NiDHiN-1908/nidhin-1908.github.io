@@ -1,117 +1,123 @@
 const svg = document.getElementById("mindmap");
-const width = window.innerWidth;
-const height = window.innerHeight;
 
-svg.setAttribute("width", width);
-svg.setAttribute("height", height);
+/* ===== Layout Configuration ===== */
+const isMobile = window.innerWidth < 768;
 
-let root;
+const NODE_WIDTH  = isMobile ? 220 : 260;
+const NODE_HEIGHT = 40;
+const H_GAP       = isMobile ? 50  : 80;
+const V_GAP       = isMobile ? 10  : 14;
 
-// Load data
+let cursorY = 40;
+let rootData;
+
+/* ===== Load Data ===== */
 fetch("data/profileTree.json")
   .then(res => res.json())
-  .then(data => {
-    root = initState(data);
+  .then(json => {
+    rootData = attachParents(json, null);
     render();
   });
 
-// Add collapsed state to every node
-function initState(node) {
-  node.collapsed = false;
+/* ===== Attach Parent References ===== */
+function attachParents(node, parent) {
+  node.__parent = parent;
   if (node.children) {
-    node.children.forEach(initState);
+    node.children.forEach(child => attachParents(child, node));
   }
   return node;
 }
 
-// Main render
+/* ===== Render Entry ===== */
 function render() {
   svg.innerHTML = "";
-  drawRoot(root);
+  cursorY = 40;
+  drawNode(rootData, 40);
 }
 
-// Draw root and primary branches
-function drawRoot(node) {
-  const cx = width / 2;
-  const cy = height / 2;
+/* ===== Draw Node Recursively ===== */
+function drawNode(node, x) {
+  const y = cursorY;
 
-  drawCircle(node, cx, cy, 0);
+  /* Node group */
+  const g = create("g", { class: "node" });
 
-  if (!node.children) return;
-
-  // Fixed mind-map directions
-  const directions = [
-    { dx: 1, dy: 0 },   // right
-    { dx: -1, dy: 0 },  // left
-    { dx: 0, dy: -1 },  // up
-    { dx: 0, dy: 1 }    // down
-  ];
-
-  node.children.forEach((child, i) => {
-    const dir = directions[i % directions.length];
-    drawBranch(child, cx, cy, dir, 1);
+  /* Rectangle */
+  const rect = create("rect", {
+    x, y,
+    width: NODE_WIDTH,
+    height: NODE_HEIGHT
   });
-}
 
-// Recursive branch drawing
-function drawBranch(node, px, py, dir, depth) {
-  const spacing = [200, 130, 100];
-  const distance = spacing[depth - 1] || 80;
-
-  const x = px + dir.dx * distance;
-  const y = py + dir.dy * distance;
-
-  drawLine(px, py, x, y);
-  drawCircle(node, x, y, depth);
-
-  if (node.collapsed || !node.children) return;
-
-  node.children.forEach((child, i) => {
-    const offset = (i - (node.children.length - 1) / 2) * 50;
-
-    const nx = dir.dx === 0 ? x + offset : x;
-    const ny = dir.dy === 0 ? y + offset : y;
-
-    drawBranch(child, x, y, dir, depth + 1);
+  /* Label */
+  const text = create("text", {
+    x: x + 12,
+    y: y + 26
   });
-}
+  text.textContent = node.label;
 
-// Draw node
-function drawCircle(node, x, y, depth) {
-  const r = depth === 0 ? 34 : depth === 1 ? 22 : 16;
+  g.append(rect, text);
 
-  const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  g.setAttribute("class", "node");
+  /* Expand arrow */
+  if (node.children) {
+    const arrow = create("text", {
+      x: x + NODE_WIDTH - 18,
+      y: y + 26,
+      class: "arrow"
+    });
+    arrow.textContent = node.expanded ? "▾" : "▸";
+    g.appendChild(arrow);
 
-  const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  c.setAttribute("cx", x);
-  c.setAttribute("cy", y);
-  c.setAttribute("r", r);
+    g.addEventListener("click", () => {
+      node.expanded = !node.expanded;
+      collapseSiblings(node.__parent, node);
+      render();
+    });
+  }
 
-  const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
-  t.setAttribute("x", x);
-  t.setAttribute("y", y + 4);
-  t.setAttribute("text-anchor", "middle");
-  t.textContent = node.label;
-
-  g.appendChild(c);
-  g.appendChild(t);
   svg.appendChild(g);
 
-  g.addEventListener("click", e => {
-    e.stopPropagation();
-    node.collapsed = !node.collapsed;
-    render();
+  cursorY += NODE_HEIGHT + V_GAP;
+
+  /* Draw children if expanded */
+  if (node.expanded && node.children) {
+    node.children.forEach(child => {
+      drawLink(
+        x + NODE_WIDTH,
+        y + NODE_HEIGHT / 2,
+        x + NODE_WIDTH + H_GAP,
+        cursorY + NODE_HEIGHT / 2
+      );
+      drawNode(child, x + NODE_WIDTH + H_GAP);
+    });
+  }
+}
+
+/* ===== Collapse Other Branches ===== */
+function collapseSiblings(parent, except) {
+  if (!parent || !parent.children) return;
+  parent.children.forEach(child => {
+    if (child !== except) child.expanded = false;
   });
 }
 
-// Draw connecting line
-function drawLine(x1, y1, x2, y2) {
-  const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-  line.setAttribute("x1", x1);
-  line.setAttribute("y1", y1);
-  line.setAttribute("x2", x2);
-  line.setAttribute("y2", y2);
-  line.setAttribute("class", "link");
-  svg.appendChild(line);
+/* ===== Draw Connection Line ===== */
+function drawLink(x1, y1, x2, y2) {
+  const path = create("path", {
+    d: `M ${x1} ${y1}
+        C ${x1 + 40} ${y1},
+          ${x2 - 40} ${y2},
+          ${x2} ${y2}`,
+    class: "link"
+  });
+  svg.appendChild(path);
+}
+
+/* ===== SVG Helper ===== */
+function create(tag, attrs) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const key in attrs) {
+    el.setAttribute(key, attrs[key]);
+  }
+  return el;
 }

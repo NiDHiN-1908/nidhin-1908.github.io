@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interactive Profile Map</title>
 
-  <!-- Mind map–specific styles only -->
+  <title>Interactive Profile Mind Map</title>
+
+  <!-- Optional: improves font consistency if Inter is not loaded globally -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Mind map–specific styles -->
   <link rel="stylesheet" href="mindmap.css" />
 </head>
+
 <body>
 
-  <!-- SVG canvas for the mind map -->
+  <!-- SVG canvas (all rendering happens via JS) -->
   <svg id="mindmap"></svg>
 
   <!-- Mind map logic -->
   <script src="mindmap.js"></script>
+
 </body>
 </html>

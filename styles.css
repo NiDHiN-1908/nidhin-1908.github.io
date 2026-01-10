@@ -1,12 +1,19 @@
+/* =========================================
+   CSS VARIABLES
+   ========================================= */
 :root {
   --bg: #0f1115;
   --surface: #151822;
+  --surface-hover: #1f2433;
   --text: #e6e6eb;
   --muted: #9aa0aa;
   --accent: #4f8cff;
   --border: #23283a;
 }
 
+/* =========================================
+   RESET & BASE
+   ========================================= */
 * {
   margin: 0;
   padding: 0;
@@ -18,13 +25,15 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
 
-/* HERO */
+/* =========================================
+   HERO
+   ========================================= */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -59,6 +68,9 @@ body {
   max-width: 600px;
 }
 
+/* =========================================
+   BUTTONS
+   ========================================= */
 .hero-actions {
   margin-top: 2rem;
   display: flex;
@@ -66,9 +78,10 @@ body {
 }
 
 .btn {
-  padding: 0.7rem 1.4rem;
-  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
   font-size: 0.9rem;
+  font-weight: 500;
   text-decoration: none;
   transition: all 0.25s ease;
 }
@@ -91,7 +104,9 @@ body {
   background: var(--surface);
 }
 
-/* SECTIONS */
+/* =========================================
+   SECTIONS
+   ========================================= */
 .section {
   padding: 5rem 8vw;
   opacity: 0;
@@ -104,19 +119,22 @@ body {
   transform: translateY(0);
 }
 
-
 .section h3 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
 }
 
-/* ABOUT */
+/* =========================================
+   ABOUT
+   ========================================= */
 .about p {
   max-width: 800px;
   color: var(--muted);
 }
 
-/* SKILLS */
+/* =========================================
+   SKILLS
+   ========================================= */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -126,13 +144,14 @@ body {
 .skill-card {
   background: var(--surface);
   padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .skill-card:hover {
   transform: translateY(-4px);
+  background: var(--surface-hover);
 }
 
 .skill-card h4 {
@@ -144,7 +163,13 @@ body {
   color: var(--muted);
 }
 
-/* PROJECTS */
+.skill-card li {
+  padding: 0.2rem 0;
+}
+
+/* =========================================
+   PROJECTS
+   ========================================= */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -154,14 +179,14 @@ body {
 .project-card {
   background: var(--surface);
   padding: 1.8rem;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--border);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .project-card p {
@@ -177,7 +202,7 @@ body {
 
 .tags span {
   font-size: 0.75rem;
-  padding: 0.3rem 0.6rem;
+  padding: 0.35rem 0.7rem;
   border-radius: 20px;
   background: #1f2433;
   color: var(--accent);
@@ -191,7 +216,9 @@ body {
   font-weight: 500;
 }
 
-/* CERTIFICATIONS */
+/* =========================================
+   CERTIFICATIONS
+   ========================================= */
 .cert-list {
   list-style: none;
   color: var(--muted);
@@ -202,7 +229,9 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-/* CONTACT */
+/* =========================================
+   CONTACT
+   ========================================= */
 .contact-links {
   display: flex;
   gap: 1.5rem;
@@ -214,7 +243,9 @@ body {
   font-weight: 500;
 }
 
-/* FOOTER */
+/* =========================================
+   FOOTER
+   ========================================= */
 .footer {
   padding: 2rem 8vw;
   text-align: center;
@@ -222,7 +253,9 @@ body {
   border-top: 1px solid var(--border);
 }
 
-/* ANIMATION */
+/* =========================================
+   ANIMATIONS
+   ========================================= */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -234,7 +267,9 @@ body {
   }
 }
 
-/* RESPONSIVE */
+/* =========================================
+   RESPONSIVE
+   ========================================= */
 @media (max-width: 768px) {
   .hero {
     padding: 0 6vw;

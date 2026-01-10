@@ -1,38 +1,133 @@
 {
-  "id": "root",
-  "label": "Nidhin S",
+  "label": "Nidhin S – Data Scientist & AI/ML Engineer",
+  "expanded": true,
   "children": [
     {
-      "id": "skills",
-      "label": "Skills",
+      "label": "Professional Summary",
+      "expanded": false,
       "children": [
-        { "id": "python", "label": "Python" },
-        { "id": "sql", "label": "SQL" },
-        { "id": "ml", "label": "Machine Learning" }
+        { "label": "AI/ML & GenAI Specialist" },
+        { "label": "Full-Stack .NET Foundation" },
+        { "label": "Analytical Problem Solver" }
       ]
     },
     {
-      "id": "projects",
-      "label": "Projects",
+      "label": "Technical Skills",
+      "expanded": false,
       "children": [
-        { "id": "churn", "label": "Customer Churn Prediction" },
-        { "id": "clv", "label": "CLV Prediction" }
+        {
+          "label": "Programming",
+          "expanded": false,
+          "children": [
+            { "label": "Python" },
+            { "label": "C#" },
+            { "label": "SQL" },
+            { "label": "JavaScript" }
+          ]
+        },
+        {
+          "label": "AI / ML / DL",
+          "expanded": false,
+          "children": [
+            { "label": "Scikit-Learn" },
+            { "label": "TensorFlow & PyTorch" },
+            { "label": "NLP Fundamentals" },
+            { "label": "Generative AI & LLMs" }
+          ]
+        },
+        {
+          "label": "Frameworks & Tools",
+          "expanded": false,
+          "children": [
+            { "label": "Django" },
+            { "label": "ASP.NET MVC" },
+            { "label": "Pandas & NumPy" },
+            { "label": "Git & GitHub" }
+          ]
+        },
+        {
+          "label": "Databases",
+          "expanded": false,
+          "children": [
+            { "label": "MySQL" },
+            { "label": "SQL Server" },
+            { "label": "MongoDB" }
+          ]
+        }
       ]
     },
     {
-      "id": "experience",
       "label": "Experience",
+      "expanded": false,
       "children": [
-        { "id": "ds", "label": "Data Science Trainee" },
-        { "id": "se", "label": "Software Engineer" }
+        {
+          "label": "Data Science Trainee",
+          "expanded": false,
+          "children": [
+            { "label": "Quest Innovative Solutions" },
+            { "label": "Gen AI Applications" },
+            { "label": "ML Model Workflows" }
+          ]
+        },
+        {
+          "label": "Software Engineer",
+          "expanded": false,
+          "children": [
+            { "label": "MACOM Solutions" },
+            { "label": ".NET Web Apps" },
+            { "label": "API Development" }
+          ]
+        },
+        {
+          "label": "Industrial Roles",
+          "expanded": false,
+          "children": [
+            { "label": "Work Permit Receiver – Petru Rabigh" },
+            { "label": "Material Controller – Shell" }
+          ]
+        }
       ]
     },
     {
-      "id": "education",
-      "label": "Education",
+      "label": "Projects",
+      "expanded": false,
       "children": [
-        { "id": "mca", "label": "MCA" },
-        { "id": "bsc", "label": "BSc Computer Science" }
+        {
+          "label": "Customer Churn Prediction",
+          "expanded": false,
+          "children": [
+            { "label": "SQL & Python Integration" },
+            { "label": "Logistic Regression" },
+            { "label": "Streamlit Dashboard" }
+          ]
+        },
+        {
+          "label": "Customer Lifetime Value",
+          "expanded": false,
+          "children": [
+            { "label": "RFM Framework" },
+            { "label": "Regression Modeling" },
+            { "label": "Quantile Segmentation" }
+          ]
+        },
+        {
+          "label": "AI-Augmented Intelligence",
+          "expanded": false,
+          "children": [
+            { "label": "GenAI Explanation Layer" },
+            { "label": "Strategic Prioritization" }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Education & Certs",
+      "expanded": false,
+      "children": [
+        { "label": "MCA – Manipal University" },
+        { "label": "BSc Computer Science – MG University" },
+        { "label": "Google Statistics Certification" },
+        { "label": "IBM Data Engineering" }
       ]
     }
   ]
