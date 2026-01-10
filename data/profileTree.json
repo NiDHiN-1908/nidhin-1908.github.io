@@ -18,6 +18,22 @@
         { "id": "churn", "label": "Customer Churn Prediction" },
         { "id": "clv", "label": "CLV Prediction" }
       ]
+    },
+    {
+      "id": "experience",
+      "label": "Experience",
+      "children": [
+        { "id": "ds", "label": "Data Science Trainee" },
+        { "id": "se", "label": "Software Engineer" }
+      ]
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "children": [
+        { "id": "mca", "label": "MCA" },
+        { "id": "bsc", "label": "BSc Computer Science" }
+      ]
     }
   ]
 }
