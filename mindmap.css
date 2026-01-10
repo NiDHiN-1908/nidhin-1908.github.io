@@ -1,4 +1,3 @@
-/* Page reset */
 html, body {
   margin: 0;
   padding: 0;
@@ -9,13 +8,11 @@ html, body {
   font-family: Inter, system-ui, sans-serif;
 }
 
-/* SVG canvas */
 #mindmap {
   width: 100vw;
   height: 100vh;
 }
 
-/* Nodes */
 .node circle {
   fill: #151822;
   stroke: #4f8cff;
@@ -28,7 +25,6 @@ html, body {
   transform: scale(1.08);
 }
 
-/* Labels */
 .node text {
   fill: #e6e6eb;
   font-size: 12px;
@@ -36,7 +32,6 @@ html, body {
   user-select: none;
 }
 
-/* Links */
 .link {
   stroke: #4f8cff;
   stroke-width: 1.5;
