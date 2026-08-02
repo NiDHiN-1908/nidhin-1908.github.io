@@ -1,62 +1,84 @@
 # Nidhin S — Portfolio
 
-Personal portfolio website showcasing my work as a **Data Scientist & AI/ML Engineer**, with a focus on **structured thinking, system design, and practical AI solutions**.
+Personal portfolio site for **Nidhin S**, Agentic AI Engineer specializing in multi-agent systems, RAG pipelines, and generative AI.
 
-🔗 **Live Site:**  
-https://nidhin-1908.github.io/
-
-🔗 **Interactive Profile Mind Map:**  
-https://nidhin-1908.github.io/mindmap.html
+**Live site:** [nidhin-1908.github.io](https://nidhin-1908.github.io/)
 
 ---
 
-## Why This Portfolio Is Different
+## About
 
-- Includes a **custom-built interactive mind map** to represent skills, experience, and projects as a structured knowledge system  
-- Demonstrates **how I think and organize complexity**, not just a list of tools  
-- Fully data-driven and expandable, not a static visual  
+A single-page, dark-theme portfolio built to showcase production AI engineering work — multi-agent orchestration (CrewAI, LangGraph), retrieval-augmented generation, and applied computer vision — alongside a full-stack development background (ASP.NET, C#, SQL Server).
 
----
+## Sections
 
-## Tech Stack
+- **Hero** — animated node-graph canvas (representing a multi-agent orchestration graph), headline, CTAs, social links
+- **About** — background, career journey, core values
+- **Skills** — grouped by category (AI/ML, LLM providers, web/backend, databases, DevOps, automation)
+- **Experience** — full career timeline, including two industrial-operations roles included transparently for employment continuity
+- **Projects** — four case studies with expandable details (Problem, Solution, Architecture, Tech Stack, Engineering Challenges, Results):
+  - **VyaparAI** (flagship) — 11-agent CrewAI + LangGraph multi-agent marketing/sales platform
+  - **RAGNoviq** — enterprise RAG pipeline with FAISS + cited LLM responses
+  - **ID Forgery Detector** — OpenCV/EasyOCR document authentication service
+  - **TalentOS AI** *(in development)* — agentic HR platform on a hybrid .NET 9 + Python/LangGraph architecture
+- **Impact Metrics** — consolidated, animated key numbers across all projects
+- **AI Expertise** — RAG, LangGraph, CrewAI, vector databases, prompt engineering, local LLM deployment
+- **Certifications**, **Education**, **GitHub** (repo highlights), **Contact** (working form via FormSubmit)
 
-**Portfolio**
-- HTML5  
-- CSS3 (Flexbox, Grid, Animations)  
-- Vanilla JavaScript  
+## Tech
 
-**Interactive Mind Map**
-- SVG-based rendering  
-- Custom hierarchical tree layout  
-- JSON-driven data (`profileTree.json`)  
-- Pure JavaScript (no frameworks)
+Single self-contained file — no build step, no framework, no dependencies to install:
 
----
+- **HTML5 / CSS3** — custom design system (CSS variables for color/spacing), glassmorphism, responsive grid layouts down to 560px
+- **Vanilla JavaScript** — scroll-reveal via `IntersectionObserver`, animated counters, 3D tilt on skill cards, magnetic buttons, custom cursor, canvas-based node-graph animation, case-study accordions
+- **Inline SVG icon set** — no external icon library/CDN dependency (avoids third-party script failures)
+- **Fonts:** Space Grotesk (display), Inter (body), JetBrains Mono (tags/data) via Google Fonts
+- **Contact form:** [FormSubmit](https://formsubmit.co/) — no backend required
 
 ## Project Structure
 
-/
-├── index.html
-├── styles.css
-├── script.js
-│
-├── mindmap.html
-├── mindmap.css
-├── mindmap.js
-│
-└── data/
-└── profileTree.json
+```
+├── index.html      # entire site — markup, styles, and scripts in one file
+└── README.md
+```
 
+Everything lives in `index.html` by design — this is a static portfolio meant to deploy with zero build tooling, directly on GitHub Pages.
 
----
+## Running Locally
+
+No installation needed. Either:
+
+```bash
+# open directly
+open index.html          # macOS
+start index.html         # Windows
+```
+
+or serve it locally to test relative behavior exactly as it deploys:
+
+```bash
+python3 -m http.server 8000
+# then visit http://localhost:8000
+```
+
+## Deployment
+
+This repo is deployed via **GitHub Pages**, serving directly from `main`. To update the live site:
+
+1. Edit `index.html`
+2. Commit and push to `main`
+3. GitHub Pages rebuilds automatically — changes are live within ~1 minute
+
+## Updating Content
+
+All content (experience, projects, skills, etc.) lives directly in `index.html` as plain HTML — search for the relevant `<section id="...">` block to edit. No CMS, no data files, no build pipeline to break.
 
 ## Contact
 
-- **GitHub:** https://github.com/NiDHiN-1908  
-- **LinkedIn:** https://www.linkedin.com/in/nidhin-s-4546432b9/  
-- **X:** https://x.com/Nidhin__S  
+- **Email:** nidhinshibu01@gmail.com
+- **LinkedIn:** [linkedin.com/in/nidhin-s-ai](https://www.linkedin.com/in/nidhin-s-ai/)
+- **GitHub:** [github.com/NiDHiN-1908](https://github.com/NiDHiN-1908)
 
 ---
 
-Hosted using **GitHub Pages**.  
-No external frameworks or libraries used.
+*Built and maintained by Nidhin S.*
