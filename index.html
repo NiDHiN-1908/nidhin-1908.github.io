@@ -805,15 +805,12 @@ footer p{font-size:13px;color:var(--text-faint);font-family:var(--font-mono);}
           <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="nidhin-s-ai" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/nidhin-s-ai?trk=profile-badge">Nidhin S</a></div>
         </div>
       </div>
-      <form class="reveal" id="contactForm" action="https://formsubmit.co/nidhinshibu01@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="New portfolio contact — nidhin-1908.github.io">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
+      <form class="reveal" id="contactForm">
         <div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" placeholder="Your name" required></div>
         <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" placeholder="you@company.com" required></div>
         <div class="field"><label for="cf-message">Message</label><textarea id="cf-message" name="message" placeholder="Tell me about the role or project..." required></textarea></div>
         <button type="submit" class="btn btn-primary" style="justify-content:center;" data-hover id="sendBtn">Send Message <i data-lucide="send" width="15" height="15"></i></button>
-        <p class="form-note">Sends straight to my inbox. First-ever submission triggers a one-time confirmation email from FormSubmit — after that it's instant.</p>
+        <p class="form-note" id="formNote">Sends straight to my inbox — you'll stay right here on this page.</p>
       </form>
     </div>
   </div>
@@ -893,6 +890,49 @@ function forceRevealAll(){
 }
 setTimeout(forceRevealAll, 2500);
 window.addEventListener('load', ()=>setTimeout(forceRevealAll, 3500));
+
+/* ---------- Contact form (AJAX — stays on page, no redirect to FormSubmit) ---------- */
+try{
+  const cForm=document.getElementById('contactForm');
+  const cNote=document.getElementById('formNote');
+  const cBtn=document.getElementById('sendBtn');
+  if(cForm){
+    cForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const originalBtnHTML=cBtn.innerHTML;
+      cBtn.disabled=true;
+      cBtn.innerHTML='Sending…';
+      cNote.style.color='var(--text-faint)';
+      cNote.textContent='Sending your message…';
+      try{
+        const data=new FormData(cForm);
+        data.append('_subject','New portfolio contact — nidhin-1908.github.io');
+        data.append('_template','table');
+        data.append('_captcha','false');
+        const res=await fetch('https://formsubmit.co/ajax/nidhinshibu01@gmail.com',{
+          method:'POST',
+          headers:{'Accept':'application/json'},
+          body:data
+        });
+        if(res.ok){
+          cForm.reset();
+          cBtn.innerHTML='Sent ✓';
+          cNote.style.color='var(--accent)';
+          cNote.textContent="Message sent — I'll get back to you soon. Thanks for reaching out!";
+          setTimeout(()=>{cBtn.innerHTML=originalBtnHTML; cBtn.disabled=false;},3000);
+        }else{
+          throw new Error('FormSubmit returned an error response');
+        }
+      }catch(err){
+        console.error('[contact-form]',err);
+        cBtn.innerHTML=originalBtnHTML;
+        cBtn.disabled=false;
+        cNote.style.color='#f87171';
+        cNote.innerHTML='Something went wrong sending that. Please email me directly at <a href="mailto:nidhinshibu01@gmail.com" style="color:var(--accent);">nidhinshibu01@gmail.com</a> instead.';
+      }
+    });
+  }
+}catch(e){console.error('[contact-form-init]',e);}
 
 /* ---------- Loader ---------- */
 try{
