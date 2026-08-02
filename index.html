@@ -353,7 +353,6 @@ footer p{font-size:13px;color:var(--text-faint);font-family:var(--font-mono);}
         <a href="https://github.com/NiDHiN-1908" target="_blank" class="social-icon" data-hover aria-label="GitHub" data-lucide-wrap><i data-lucide="github"></i></a>
         <a href="https://www.linkedin.com/in/nidhin-s-ai/" target="_blank" class="social-icon" data-hover aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
         <a href="mailto:nidhinshibu01@gmail.com" class="social-icon" data-hover aria-label="Email"><i data-lucide="mail"></i></a>
-        <a href="https://nidhin-1908.github.io/" target="_blank" class="social-icon" data-hover aria-label="Portfolio"><i data-lucide="globe"></i></a>
       </div>
     </div>
     <div class="hero-orb-wrap">
@@ -885,146 +884,197 @@ function renderIcons(){
 }
 renderIcons();
 
+/* ---------- FAIL-SAFE: guarantee every section becomes visible no matter what ----------
+   This runs independently of everything below. Even if a later feature throws an error,
+   times out, or a browser extension blocks a script, this still forces all .reveal
+   content visible — so the page can never get stuck showing blank sections. */
+function forceRevealAll(){
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
+setTimeout(forceRevealAll, 2500);
+window.addEventListener('load', ()=>setTimeout(forceRevealAll, 3500));
+
 /* ---------- Loader ---------- */
-window.addEventListener('load',()=>{
-  setTimeout(()=>document.getElementById('loader').classList.add('hidden'),900);
-});
+try{
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{const l=document.getElementById('loader'); if(l) l.classList.add('hidden');},900);
+  });
+}catch(e){console.error('[loader]',e);}
 
 /* ---------- Custom cursor ---------- */
-const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
-function animRing(){rx+=(mx-rx)*0.16;ry+=(my-ry)*0.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
-animRing();
-document.querySelectorAll('[data-hover],.skill-card,.project-card,.glass').forEach(el=>{
-  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
-  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
-});
-
-/* ---------- Scroll progress + navbar ---------- */
-const progress=document.getElementById('progress'), navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement;
-  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
-  progress.style.width=pct+'%';
-  navbar.classList.toggle('scrolled',h.scrollTop>40);
-});
-
-/* ---------- Mobile nav ---------- */
-const burger=document.getElementById('burger'),mnav=document.getElementById('mobile-nav'),closeM=document.getElementById('closeM');
-burger.addEventListener('click',()=>mnav.classList.add('open'));
-closeM.addEventListener('click',()=>mnav.classList.remove('open'));
-mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mnav.classList.remove('open')));
-
-/* ---------- Reveal on scroll ---------- */
-const io=new IntersectionObserver((entries)=>{
-  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
-},{threshold:0.15});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-/* ---------- Counters ---------- */
-const counters=document.querySelectorAll('[data-count]');
-const cio=new IntersectionObserver((entries)=>{
-  entries.forEach(en=>{
-    if(en.isIntersecting){
-      const el=en.target, target=+el.dataset.count; let cur=0;
-      const prefix=el.dataset.countPrefix||'', suffix=el.dataset.countSuffix||'';
-      const step=Math.max(1,Math.ceil(target/40));
-      const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(t);} el.textContent=prefix+cur+suffix;},30);
-      cio.unobserve(el);
-    }
-  });
-},{threshold:0.5});
-counters.forEach(c=>cio.observe(c));
-
-/* ---------- Case study toggles ---------- */
-document.querySelectorAll('[data-toggle]').forEach(t=>{
-  t.addEventListener('click',()=>{
-    t.classList.toggle('open');
-    const detail=t.nextElementSibling;
-    detail.classList.toggle('open');
-  });
-});
-
-/* ---------- 3D tilt on skill cards ---------- */
-document.querySelectorAll('[data-tilt]').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const x=e.clientX-r.left, y=e.clientY-r.top;
-    const rx=((y/r.height)-0.5)*-8, ry=((x/r.width)-0.5)*8;
-    card.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
-  });
-  card.addEventListener('mouseleave',()=>{card.style.transform='';});
-});
-
-/* ---------- Magnetic buttons ---------- */
-document.querySelectorAll('.btn-primary,.social-icon,.plink,.back-top').forEach(btn=>{
-  btn.addEventListener('mousemove',e=>{
-    const r=btn.getBoundingClientRect();
-    const x=e.clientX-r.left-r.width/2, y=e.clientY-r.top-r.height/2;
-    btn.style.transform=`translate(${x*0.25}px, ${y*0.25}px)`;
-  });
-  btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
-});
-
-/* ---------- Back to top ---------- */
-document.getElementById('backTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-
-/* ---------- Hero node-graph canvas (signature element) ---------- */
-const canvas=document.getElementById('hero-canvas');
-const ctx=canvas.getContext('2d');
-let W,H,nodes=[];
-function resize(){
-  W=canvas.width=canvas.offsetWidth*devicePixelRatio;
-  H=canvas.height=canvas.offsetHeight*devicePixelRatio;
-}
-function initNodes(){
-  nodes=[];
-  const count=Math.max(18,Math.floor((canvas.offsetWidth*canvas.offsetHeight)/38000));
-  for(let i=0;i<count;i++){
-    nodes.push({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-0.5)*0.25*devicePixelRatio, vy:(Math.random()-0.5)*0.25*devicePixelRatio,
-      r:(Math.random()*1.6+1)*devicePixelRatio
+try{
+  const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
+  if(dot&&ring){
+    let mx=0,my=0,rx=0,ry=0;
+    window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+    function animRing(){rx+=(mx-rx)*0.16;ry+=(my-ry)*0.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+    animRing();
+    document.querySelectorAll('[data-hover],.skill-card,.project-card,.glass').forEach(el=>{
+      el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
+      el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
     });
   }
-}
-function resizeAll(){resize();initNodes();}
-window.addEventListener('resize',resizeAll);
-resizeAll();
+}catch(e){console.error('[cursor]',e);}
 
-const colors=['37,99,235','124,58,237','6,182,212'];
-function drawGraph(){
-  ctx.clearRect(0,0,W,H);
-  for(let i=0;i<nodes.length;i++){
-    const n=nodes[i];
-    n.x+=n.vx; n.y+=n.vy;
-    if(n.x<0||n.x>W)n.vx*=-1;
-    if(n.y<0||n.y>H)n.vy*=-1;
+/* ---------- Scroll progress + navbar ---------- */
+try{
+  const progress=document.getElementById('progress'), navbar=document.getElementById('navbar');
+  if(progress&&navbar){
+    window.addEventListener('scroll',()=>{
+      const h=document.documentElement;
+      const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+      progress.style.width=pct+'%';
+      navbar.classList.toggle('scrolled',h.scrollTop>40);
+    });
   }
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      const a=nodes[i],b=nodes[j];
-      const dx=a.x-b.x, dy=a.y-b.y;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      const maxDist=170*devicePixelRatio;
-      if(dist<maxDist){
-        const op=(1-dist/maxDist)*0.35;
-        ctx.strokeStyle=`rgba(${colors[(i+j)%3]},${op})`;
-        ctx.lineWidth=1*devicePixelRatio*0.6;
-        ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+}catch(e){console.error('[progress-nav]',e);}
+
+/* ---------- Mobile nav ---------- */
+try{
+  const burger=document.getElementById('burger'),mnav=document.getElementById('mobile-nav'),closeM=document.getElementById('closeM');
+  if(burger&&mnav&&closeM){
+    burger.addEventListener('click',()=>mnav.classList.add('open'));
+    closeM.addEventListener('click',()=>mnav.classList.remove('open'));
+    mnav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mnav.classList.remove('open')));
+  }
+}catch(e){console.error('[mobile-nav]',e);}
+
+/* ---------- Reveal on scroll ---------- */
+try{
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    },{threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  }else{
+    forceRevealAll();
+  }
+}catch(e){console.error('[reveal]',e); forceRevealAll();}
+
+/* ---------- Counters ---------- */
+try{
+  const counters=document.querySelectorAll('[data-count]');
+  if('IntersectionObserver' in window){
+    const cio=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          const el=en.target, target=+el.dataset.count; let cur=0;
+          const prefix=el.dataset.countPrefix||'', suffix=el.dataset.countSuffix||'';
+          const step=Math.max(1,Math.ceil(target/40));
+          const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(t);} el.textContent=prefix+cur+suffix;},30);
+          cio.unobserve(el);
+        }
+      });
+    },{threshold:0.5});
+    counters.forEach(c=>cio.observe(c));
+  }else{
+    counters.forEach(el=>{el.textContent=(el.dataset.countPrefix||'')+el.dataset.count+(el.dataset.countSuffix||'');});
+  }
+}catch(e){console.error('[counters]',e);}
+
+/* ---------- Case study toggles ---------- */
+try{
+  document.querySelectorAll('[data-toggle]').forEach(t=>{
+    t.addEventListener('click',()=>{
+      t.classList.toggle('open');
+      const detail=t.nextElementSibling;
+      if(detail) detail.classList.toggle('open');
+    });
+  });
+}catch(e){console.error('[case-toggle]',e);}
+
+/* ---------- 3D tilt on skill cards ---------- */
+try{
+  document.querySelectorAll('[data-tilt]').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=e.clientX-r.left, y=e.clientY-r.top;
+      const rx=((y/r.height)-0.5)*-8, ry=((x/r.width)-0.5)*8;
+      card.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
+}catch(e){console.error('[tilt]',e);}
+
+/* ---------- Magnetic buttons ---------- */
+try{
+  document.querySelectorAll('.btn-primary,.social-icon,.plink,.back-top').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      const x=e.clientX-r.left-r.width/2, y=e.clientY-r.top-r.height/2;
+      btn.style.transform=`translate(${x*0.25}px, ${y*0.25}px)`;
+    });
+    btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
+  });
+}catch(e){console.error('[magnetic]',e);}
+
+/* ---------- Back to top ---------- */
+try{
+  const backTop=document.getElementById('backTop');
+  if(backTop) backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+}catch(e){console.error('[back-top]',e);}
+
+/* ---------- Hero node-graph canvas (signature element) ---------- */
+try{
+  const canvas=document.getElementById('hero-canvas');
+  if(canvas){
+    const ctx=canvas.getContext('2d');
+    let W,H,nodes=[];
+    function resize(){
+      W=canvas.width=canvas.offsetWidth*devicePixelRatio;
+      H=canvas.height=canvas.offsetHeight*devicePixelRatio;
+    }
+    function initNodes(){
+      nodes=[];
+      const count=Math.max(18,Math.floor((canvas.offsetWidth*canvas.offsetHeight)/38000));
+      for(let i=0;i<count;i++){
+        nodes.push({
+          x:Math.random()*W, y:Math.random()*H,
+          vx:(Math.random()-0.5)*0.25*devicePixelRatio, vy:(Math.random()-0.5)*0.25*devicePixelRatio,
+          r:(Math.random()*1.6+1)*devicePixelRatio
+        });
       }
     }
+    function resizeAll(){resize();initNodes();}
+    window.addEventListener('resize',resizeAll);
+    resizeAll();
+
+    const colors=['37,99,235','124,58,237','6,182,212'];
+    function drawGraph(){
+      try{
+        ctx.clearRect(0,0,W,H);
+        for(let i=0;i<nodes.length;i++){
+          const n=nodes[i];
+          n.x+=n.vx; n.y+=n.vy;
+          if(n.x<0||n.x>W)n.vx*=-1;
+          if(n.y<0||n.y>H)n.vy*=-1;
+        }
+        for(let i=0;i<nodes.length;i++){
+          for(let j=i+1;j<nodes.length;j++){
+            const a=nodes[i],b=nodes[j];
+            const dx=a.x-b.x, dy=a.y-b.y;
+            const dist=Math.sqrt(dx*dx+dy*dy);
+            const maxDist=170*devicePixelRatio;
+            if(dist<maxDist){
+              const op=(1-dist/maxDist)*0.35;
+              ctx.strokeStyle=`rgba(${colors[(i+j)%3]},${op})`;
+              ctx.lineWidth=1*devicePixelRatio*0.6;
+              ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+            }
+          }
+        }
+        for(const n of nodes){
+          ctx.beginPath();
+          ctx.fillStyle=`rgba(6,182,212,0.55)`;
+          ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(drawGraph);
+      }catch(e){console.error('[canvas-frame]',e);}
+    }
+    drawGraph();
   }
-  for(const n of nodes){
-    ctx.beginPath();
-    ctx.fillStyle=`rgba(6,182,212,0.55)`;
-    ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-    ctx.fill();
-  }
-  requestAnimationFrame(drawGraph);
-}
-drawGraph();
+}catch(e){console.error('[canvas-init]',e);}
 </script>
 </body>
 </html>
