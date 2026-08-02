@@ -200,6 +200,8 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;}
 .project-role{font-family:var(--font-mono);font-size:12px;color:var(--accent);}
 .flagship-card{border:1px solid rgba(6,182,212,0.35);box-shadow:0 0 0 1px rgba(6,182,212,0.08),0 30px 70px -30px rgba(37,99,235,0.35);}
 .flagship-badge{font-family:var(--font-mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 11px 5px 9px;border-radius:100px;background:linear-gradient(120deg,var(--primary),var(--secondary));color:#fff;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;box-shadow:0 4px 14px rgba(37,99,235,0.4);}
+.building-badge{font-family:var(--font-mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 11px;border-radius:100px;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.4);color:var(--accent);display:inline-flex;align-items:center;gap:6px;vertical-align:middle;}
+.building-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 1.8s ease-in-out infinite;}
 .demo-note{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;border-radius:10px;background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.25);margin-bottom:22px;}
 .demo-note i{color:var(--secondary);flex-shrink:0;margin-top:1px;}
 .demo-note p{font-size:13px;color:var(--text-dim);}
@@ -478,7 +480,7 @@ footer p{font-size:13px;color:var(--text-faint);font-family:var(--font-mono);}
   <div class="wrap">
     <div class="eyebrow">Featured Projects</div>
     <h2 class="section-title reveal">Systems I've architected, not just scripts I've run</h2>
-    <p class="section-lede reveal">Three production-grade builds spanning multi-agent orchestration, enterprise RAG, and applied computer vision — led by <b style="color:var(--text);">VyaparAI</b>, the flagship platform.</p>
+    <p class="section-lede reveal">Four builds spanning multi-agent orchestration, enterprise RAG, applied computer vision, and agentic HR systems — led by <b style="color:var(--text);">VyaparAI</b>, the flagship platform. TalentOS AI is actively in progress.</p>
 
     <div class="glass reveal" style="padding:22px 28px;margin-bottom:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
       <div style="text-align:center;"><div style="font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--accent);">11</div><div style="font-family:var(--font-mono);font-size:11px;color:var(--text-faint);margin-top:2px;">agents · CrewAI suite</div></div>
@@ -675,6 +677,34 @@ footer p{font-size:13px;color:var(--text-faint);font-family:var(--font-mono);}
         </div>
       </div>
     </div>
+
+    <!-- Project 4 — IN DEVELOPMENT -->
+    <div class="glass project-card reveal">
+      <div class="project-top">
+        <div><h3>TalentOS AI <span class="building-badge"><span class="dot"></span>Building Now</span></h3><div class="project-role">Agentic HR Operating System</div></div>
+        <div class="project-links">
+          <a href="https://github.com/NiDHiN-1908/TalentOS_AI" target="_blank" class="plink" data-hover><i data-lucide="github" width="16" height="16"></i></a>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">An agentic HR platform on a hybrid architecture — a .NET business core paired with a Python AI service coordinated by a LangGraph supervisor. Currently in active development, not yet deployed.</p>
+        <div class="demo-note"><i data-lucide="info" width="16" height="16"></i><p><b style="color:var(--text);">Status:</b> this project is actively being built — no live deployment yet. Included to show current work in progress, not a finished product.</p></div>
+        <div class="case-toggle" data-toggle>View case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="case-detail">
+          <div class="case-inner">
+            <div class="case-block full"><h5>Business Context</h5><p>HR platforms typically bolt AI onto an existing system as an afterthought. TalentOS AI is designed the other way around — AI reasoning and business logic as two dedicated, cleanly-separated platforms from day one.</p></div>
+            <div class="case-block"><h5>Architecture</h5><p>ASP.NET Core (.NET 9) owns the business/transactional layer — auth, RBAC, employee records, payroll, audit trails. A dedicated Python/FastAPI service owns AI reasoning, coordinated by a LangGraph supervisor agent routing to specialized sub-agents.</p></div>
+            <div class="case-block"><h5>Key Design Decision</h5><p>AI agents never touch business data directly — every AI action calls the .NET platform through a dedicated integration client. This keeps business logic auditable and AI reasoning replaceable without touching transactional code.</p></div>
+            <div class="case-block"><h5>In Progress</h5><p>Building out the recruitment pipeline: multiple zero-cost candidate intake channels (career portal, referrals, resume upload, CSV/Excel import), vector-based candidate ranking, and an agent-orchestration view in the frontend.</p></div>
+            <div class="case-block"><h5>Tech Stack</h5><p>ASP.NET Core (.NET 9), Python 3.11, FastAPI, LangGraph, React, TypeScript, PostgreSQL (pgvector), Docker.</p></div>
+            <div class="case-block full"><h5>Current Status &amp; Next Steps</h5><p>Core service boundaries and the AI supervisor pattern are built; recruitment-pipeline features and deployment are the current focus. No live demo yet — check back or follow the GitHub repo for progress.</p></div>
+          </div>
+        </div>
+        <div class="project-tech">
+          <span class="tag">ASP.NET Core (.NET 9)</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">LangGraph</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -748,11 +778,11 @@ footer p{font-size:13px;color:var(--text-faint);font-family:var(--font-mono);}
         <div class="glass gh-stat"><div class="n" data-count="4">0</div><div class="l">active production builds</div></div>
       </div>
       <div class="repo-list reveal">
+        <a href="https://github.com/NiDHiN-1908/TalentOS_AI" target="_blank" class="glass repo-item" data-hover><div><h5>TalentOS_AI <span style="color:var(--accent);font-size:10.5px;">· building now</span></h5><p>Agentic HR platform — .NET 9 + Python/LangGraph hybrid</p></div><div class="repo-lang"><span class="lang-dot"></span>C# / Python</div></a>
         <a href="https://github.com/NiDHiN-1908/VyaparAI" target="_blank" class="glass repo-item" data-hover><div><h5>VyaparAI</h5><p>Multi-agent marketing &amp; sales engine, 22 regional languages</p></div><div class="repo-lang"><span class="lang-dot"></span>Python</div></a>
         <a href="https://github.com/NiDHiN-1908/ragnoviq-enterprise-rag-assistant" target="_blank" class="glass repo-item" data-hover><div><h5>ragnoviq-enterprise-rag-assistant</h5><p>Production-grade RAG assistant with source citations</p></div><div class="repo-lang"><span class="lang-dot"></span>Python</div></a>
         <a href="https://github.com/NiDHiN-1908/id-document-forgery-detection" target="_blank" class="glass repo-item" data-hover><div><h5>id-document-forgery-detection</h5><p>Image forensics + OCR fraud risk reporting</p></div><div class="repo-lang"><span class="lang-dot"></span>Python</div></a>
         <a href="https://github.com/NiDHiN-1908/customer-economics-engine" target="_blank" class="glass repo-item" data-hover><div><h5>customer-economics-engine</h5><p>CLV prediction via RFM feature engineering</p></div><div class="repo-lang"><span class="lang-dot"></span>Jupyter</div></a>
-        <a href="https://github.com/NiDHiN-1908/customer-churn-sql-python" target="_blank" class="glass repo-item" data-hover><div><h5>customer-churn-sql-python</h5><p>End-to-end churn prediction — SQL, Python, ML, Streamlit</p></div><div class="repo-lang"><span class="lang-dot"></span>Python</div></a>
         <a href="https://github.com/NiDHiN-1908" target="_blank" class="glass repo-item" data-hover><div><h5>View full profile →</h5><p>13 public repositories total</p></div><div class="repo-lang"><i data-lucide="arrow-up-right" width="14" height="14"></i></div></a>
       </div>
     </div>
